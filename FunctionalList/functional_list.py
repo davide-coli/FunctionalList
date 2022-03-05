@@ -1,5 +1,5 @@
 from types import LambdaType
-from exceptions import NoParametersException, TooManyParametersException, NonCallableException, TooFewParametersReduceException
+from .exceptions import NoParametersException, TooManyParametersException, NonCallableException, TooFewParametersReduceException
 
 class FunctionalList(list):
 
