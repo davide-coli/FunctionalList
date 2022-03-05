@@ -1,5 +1,5 @@
 from types import LambdaType
-from .exceptions import NoParametersException, TooManyParametersException, NonCallableException, TooFewParametersReduceException
+from exceptions import NoParametersException, TooManyParametersException, NonCallableException, TooFewParametersReduceException
 
 class FunctionalList(list):
 
@@ -167,7 +167,7 @@ class FunctionalList(list):
 
     def __flattened_generator(self):
         for val in self:
-            if hasattr(val, '__iter__'):
+            if isinstance(val, list):
                 for subval in val:
                     yield subval
             else:
@@ -187,7 +187,12 @@ class FunctionalList(list):
             raise TypeError('depth should be an integer')
         if depth <= 0:
             return self.copy()
-        result = FunctionalList(self.__flattened_generator)
+        result = FunctionalList(self.__flattened_generator())
         if depth == 1:
             return result
         return result.flat(depth-1)
+
+
+if __name__ == '__main__':
+    U = FunctionalList([1,2, FunctionalList( [3,4,5] )])
+    print(U.flat())
