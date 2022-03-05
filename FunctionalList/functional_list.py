@@ -1,5 +1,5 @@
 from types import LambdaType
-from exceptions import NoParametersException, TooManyParametersException, NonCallableException, TooFewParametersReduceException
+from .exceptions import NoParametersException, TooManyParametersException, NonCallableException, TooFewParametersReduceException
 
 class FunctionalList(list):
 
@@ -191,8 +191,3 @@ class FunctionalList(list):
         if depth == 1:
             return result
         return result.flat(depth-1)
-
-
-if __name__ == '__main__':
-    U = FunctionalList([1,2, FunctionalList( [3,4,5] )])
-    print(U.flat())
